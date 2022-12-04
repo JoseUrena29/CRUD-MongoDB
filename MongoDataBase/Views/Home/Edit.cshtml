@@ -1,0 +1,100 @@
+﻿@model Users
+
+@{
+    ViewData["Title"] = "Edit Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Edit Users</h1>
+</div>
+
+<style>
+
+    body{
+        background: rgb(84,246,154);
+        background: linear-gradient(90deg, rgba(84,246,154,0.7399334733893557) 0%, rgba(98,246,84,0.5802696078431373) 49%, rgba(0,255,51,0.42620798319327735) 99%);
+    }
+
+    .card {
+        margin: 0 auto;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div class="text-center">
+        <form asp-action="Index" asp-controller="Home">
+            <button class="btn btn-success" type="submit">Home</button>
+        </form>
+    </div>
+    <hr />
+
+    <div class="card">
+        <div class="text-center">
+            <br />
+            <div class="flex-shrink-0">
+                <img src=/img/edit.jpg class="avatar" alt="..." style="width:150px">
+            </div>
+            <br />
+            @foreach (var @item in @ViewBag.userListID)
+            {
+                <div class="card shadow-sm" style="width:252px">
+                    <div class="card-body">
+                        <form asp-controller="Home" asp-action="UpdateUser" method="POST">
+                            <hr />
+                            <div class="form-floating mb-3">
+                                <input value="@item._id" name="txtId" type="text" class="form-control" id="floatingInput" placeholder="ID" readonly required>
+                                <label for="floatingInput">ID</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input value="@item.name" name="txtName" type="text" class="form-control" id="floatingInput" placeholder="Name" required>
+                                <label for="floatingInput">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input value="@item.email" name="txtEmail" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input value="@item.phone" name="txtPhone" type="text" class="form-control" id="floatingInput" placeholder="Phone" required>
+                                <label for="floatingInput">Phone</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input value="@item.address" name="txtAddress" type="text" class="form-control" id="floatingInput" placeholder="Address" required>
+                                <label for="floatingInput">Address</label>
+                            </div>
+                            <br />
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalUpdate">
+                                    Update User
+                                </button>
+                            </div>
+                            <br />
+
+                            <!-- Modal Update -->
+                            <div class="modal fade" id="exampleModalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit user</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            You really want to edit this user? @item.name
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+</body>
